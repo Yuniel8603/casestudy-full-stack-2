@@ -2,6 +2,7 @@ package net.codejava.user_module.controller;
 
 import net.codejava.user_module.entity.User;
 import net.codejava.user_module.repository.UserRepository;
+import net.codejava.user_module.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @GetMapping("/signup")
     public String showSignUpForm(User user) {
@@ -27,19 +28,19 @@ public class UserController {
             return "add-user";
         }
 
-        userRepository.save(user);
+        userService.save(user);
         return "redirect:/index";
     }
 
     @GetMapping("/index")
     public String showUserList(Model model) {
-        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("users", userService.findAll());
         return "index";
     }
 
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
-        User user = userRepository.findById(id)
+        User user = userService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 
         model.addAttribute("user", user);
@@ -54,15 +55,15 @@ public class UserController {
             return "update-user";
         }
 
-        userRepository.save(user);
+        userService.save(user);
         return "redirect:/index";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id, Model model) {
-        User user = userRepository.findById(id)
+        User user = userService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        userRepository.delete(user);
+        userService.delete(user);
         return "redirect:/index";
     }
 }
