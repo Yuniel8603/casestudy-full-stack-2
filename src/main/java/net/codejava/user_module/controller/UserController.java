@@ -23,13 +23,12 @@ public class UserController {
     }
 
     @PostMapping("/adduser")
-    public String addUser(User user, BindingResult result, Model model/*, RedirectAttributes attribute*/) {
+    public String addUser(User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "add-user";
         }
 
         userRepository.save(user);
-        //attribute.addFlashAttribute("success","Usuario guardado con exito");
         return "redirect:/index";
     }
 
@@ -50,14 +49,12 @@ public class UserController {
 
     @PostMapping("/update/{id}")
     public String updateUser(@PathVariable("id") long id, User user,
-                             BindingResult result, Model model /*,RedirectAttributes attribute*/) {
+                             BindingResult result, Model model) {
         if (result.hasErrors()) {
             user.setId(id);
             return "update-user";
         }
-
         userRepository.save(user);
-       // attribute.addFlashAttribute("success","Usuario modificado con exito");
         return "redirect:/index";
     }
 
