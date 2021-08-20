@@ -1,0 +1,6 @@
+net\codejava\user_module\controller\UserController.class
+net\codejava\user_module\repository\UserRepository.class
+net\codejava\SBSimpleXTest.class
+net\codejava\user_module\entity\User.class
+net\codejava\user_module\service\UserServiceImpl.class
+net\codejava\user_module\service\IUserService.class

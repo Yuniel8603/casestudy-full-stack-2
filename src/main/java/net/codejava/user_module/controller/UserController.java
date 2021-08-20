@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
@@ -22,12 +23,13 @@ public class UserController {
     }
 
     @PostMapping("/adduser")
-    public String addUser(User user, BindingResult result, Model model) {
+    public String addUser(User user, BindingResult result, Model model/*, RedirectAttributes attribute*/) {
         if (result.hasErrors()) {
             return "add-user";
         }
 
         userRepository.save(user);
+        //attribute.addFlashAttribute("success","Usuario guardado con exito");
         return "redirect:/index";
     }
 
@@ -48,13 +50,14 @@ public class UserController {
 
     @PostMapping("/update/{id}")
     public String updateUser(@PathVariable("id") long id, User user,
-                             BindingResult result, Model model) {
+                             BindingResult result, Model model /*,RedirectAttributes attribute*/) {
         if (result.hasErrors()) {
             user.setId(id);
             return "update-user";
         }
 
         userRepository.save(user);
+       // attribute.addFlashAttribute("success","Usuario modificado con exito");
         return "redirect:/index";
     }
 
