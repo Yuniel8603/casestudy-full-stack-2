@@ -1,2 +1,2 @@
-# casestudy-full-stack-2
-Prueba de admisión a Quiox
+# casestudy
+Case study in test form to validate entry to the company.

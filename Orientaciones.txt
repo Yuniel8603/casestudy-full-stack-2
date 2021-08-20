@@ -1,0 +1,18 @@
+Bienvenido a la prueba tecnica de Quiox
+
+Esperamos lo mejor de ud con esta simple prueba.
+Queremos de interactue con git, con la arquitectura de SpringBoot y Thymeleaf haciendo uso de la documentacion en Internet.
+Todas las direcciones que consulte en Internet, y que le sean utiles, por favor, escribirlas al final de este documento.
+
+1. Cree una rama de nombre identificativo para implementar su respuesta.
+    - El nombre de la rama puede ser su nombre de usuario o su mismo nombre.
+2. Asegurese de que el proyecto inicialmente ejecuta bien en su localhost.
+    - Para ello puede hacer uso del comando en linea: mvn spring-boot:run
+    - O puede apoyarse en la configuracion y ejecucion desde su IDE favorito.
+    - Si en este punto aun no tiene una experiencia trabajando con spring, apoyese en la documentacion en Internet.
+3. Incorpore una capa de servicios para agregar y modificar usuarios.
+3. Realice las modificaciones necesarias para utilizar los fragmentos de capas que han sido implementadas en: template/layout; para
+    - Aplicar la plantilla base en las paginas
+    - Aplicar la plantilla de para formularios
+
+Toda documentacion valida que consulte, escribala al final de la documentacion.

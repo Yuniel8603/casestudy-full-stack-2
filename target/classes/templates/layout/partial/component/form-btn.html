@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+    </head>
+    <body>
+
+        <!-- Cancel -->
+        <th:block th:fragment="btn-cancel(uri)">
+            <a  class="btn btn-secondary"
+                th:href="@{__${uri}__}"
+                th:text="${text} ? ${text} : 'Cancelar'"></a>
+        </th:block>
+
+
+        <!-- Acept -->
+        <th:block th:fragment="btn-action-chk(id, text, type, checkRole)">
+            <button  th:if="!${@userLoginService.isFunctionalityAllow(checkRole)}"
+                     type="button" href="#"
+                     th:id="${id}"
+                     th:disabled="true"
+                     th:classappend="${type}" class="btn "
+                     th:text="${text} ? ${text} : 'Accion'">
+            </button>
+
+            <button  th:if="${@userLoginService.isFunctionalityAllow(checkRole)}"
+                     type="button" href="#"
+                     th:id="${id}"
+                     th:classappend="${type}" class="btn "
+                     th:text="${text} ? ${text} : 'Accion'">
+            </button>
+        </th:block>
+
+        <th:block th:fragment="btn-button(name, text)">
+            <button type="button" th:id="${name}" th:name="${name}" th:text="${text}" th:value="${value} ? ${value} : ''" class="btn btn-success" th:classappend="${cssclass} ? ${cssclass} : ''"></button>
+        </th:block>
+
+        <th:block th:fragment="btn-button-uri-chk(name, uri, text, type, checkRole)">
+            <a  th:if="${@userLoginService.isFunctionalityAllow(checkRole)}"
+                     type="button"
+                     th:name="${name}"
+                     th:href="@{__${uri}__}"
+                     th:classappend="${type}" class="btn "
+                     th:text="${text} ? ${text} : 'Accion'">
+            </a>
+        </th:block>
+
+        <th:block th:fragment="btn-button-id-chk(name, text, type, checkRole)">
+
+            <button th:if="${@userLoginService.isFunctionalityAllow(checkRole)}"
+                    th:id="${name}"
+                    type="button"
+                    th:name="${name}"
+                    class="btn"
+                    th:classappend="${type}"
+                    th:text="${text} ? ${text} : 'Accion'">
+            </button>
+
+        </th:block>
+
+        <!-- Submit -->
+        <th:block th:fragment="btn-submit-chk(checkRole)">
+            <button th:if="!${@userLoginService.isFunctionalitiesAllow(checkRole)}"
+                    th:disabled="true"
+                    actiontype="submit" type="submit" name="btn-submit" th:text="${text} ? ${text} : 'Aceptar'" th:value="${value} ? ${value} : ''" class="btn btn-primary btn-submit" th:classappend="${cssclass} ? ${cssclass} : ''">
+            </button>
+
+            <button th:if="${@userLoginService.isFunctionalitiesAllow(checkRole)}"
+                    actiontype="submit" type="submit" name="btn-submit" th:text="${text} ? ${text} : 'Aceptar'" th:value="${value} ? ${value} : ''" class="btn btn-primary btn-submit" th:classappend="${cssclass} ? ${cssclass} : ''">
+            </button>
+        </th:block>
+
+        <th:block th:fragment="btn-submit">
+            <button actiontype="submit" type="submit" name="btn-submit" th:text="${text} ? ${text} : 'Aceptar'" th:value="${value} ? ${value} : ''" class="btn btn-primary btn-submit"></button>
+        </th:block>
+
+
+        <!-- Delete -->
+            <th:block th:fragment="btn-delete-chk(uri, checkRole)">
+
+            <button th:if="!${@userLoginService.isFunctionalitiesAllow(checkRole)}"
+                    th:disabled="true"
+                    class="btn-danger btn-tool-button btn btn-danger" th:text="${text} ? ${text} : 'Eliminar'">
+            </button>
+
+            <button th:if="${@userLoginService.isFunctionalitiesAllow(checkRole)}"
+                    th:attr="uriAction=${uri}, messageDel=${messageDel} ? ${messageDel} : '' " class="btn_simple_delete_confirm btn_simple_delete_confirm btn btn-danger" th:text="${text} ? ${text} : 'Eliminar'">
+            </button>
+        </th:block>
+
+        <th:block th:fragment="btn-delete(uri)">
+            <button
+                    th:attr="uriAction=${uri}" class="btn_simple_delete_confirm btn_simple_delete_confirm btn btn-danger" th:text="${text} ? ${text} : 'Eliminar'">
+            </button>
+        </th:block>
+
+    </body>
+</html>

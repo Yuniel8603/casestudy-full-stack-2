@@ -1,0 +1,63 @@
+#Server ================
+server:
+#    port: 3000
+    servlet:
+      context-path:
+      session:
+        timeout: 3600
+logging:
+    level:
+        org.springframework.web: debug #debug off
+        org.hibernate.type: trace #trace off
+
+#Spring   ===============
+spring:
+    sql:
+      init:
+        platform: postgres
+        encoding: UTF-8
+    datasource:
+        url: jdbc:postgresql://localhost:5432/testing
+        username: postgres
+        password: N0rges123
+        test-on-borrow: true
+        validation-query: SELECT 1
+#    flyway:
+#        baselineOnMigrate: true
+#        baselineVersion: 1
+#        enabled: true
+#        locations: filesystem:Data/sql_updates/run_prod_update_scripts
+    jpa:
+        generate-ddl: false
+        show_sql:  true #true false
+        hibernate:
+            ddl-auto: update #validate|update|none
+        properties:
+            hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
+            hibernate.show_sql: true #true false
+            hibernate.format_sql: true
+            hibernate.temp.use_jdbc_metadata_defaults : false
+    thymeleaf.cache: true #true false
+    web.resources:
+      cache:
+        cachecontrol:
+          cache-public: true
+          no-cache: false
+          no-store: false
+          must-revalidate: false
+    jackson:
+        locale: es_MX
+        time-zone: Mexico/General
+        date-format: yyyy-MM-dd'T'HH:mmZ
+        serialization:
+           write-dates-as-timestamps: false
+    mail:
+        alias: Gedux
+        from: noreply@gedux.mx
+        host: smtp.ionos.mx
+        port: 587
+        username: app@gedux.mx
+        password: A8U8TstP9.W2xVx
+    servlet:
+      multipart:
+        max-file-size: 5MB

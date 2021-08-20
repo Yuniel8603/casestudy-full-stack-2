@@ -1,0 +1,244 @@
+<!--Input Date -->
+<th:block th:fragment="input-date (name, value, label)">
+    <div th:id="${'container_' + name}" class="form-group" th:classappend="${cssclass} ? ${cssclass} : 'col-lg-4 col-md-6'"
+         th:style="${customStyle} ? ${customStyle} : ''">
+        <label th:for="${name}" th:text="${label}">Label</label>
+        <input
+                th:id="${name}"
+                th:name="${name}"
+                type="text"
+                class="form-control boostrap-datepicker"
+
+                th:value="${@geduxDateFormat.fromObjectDate(value)}"
+                th:attr="date-value=${@geduxDateFormat.fromObjectDate(value)}"
+                th:title="${help}"
+        />
+        <div class="error_container_element" th:id="${'error_container_' + name}"></div>
+    </div>
+</th:block>
+
+
+<!--Input Text -->
+<th:block th:fragment="input-text (name, value, label)">
+    <div th:id="${'container_' + name}" class="form-group " th:classappend="${cssclass} ? ${cssclass} : 'col-lg-4 col-md-6'"
+         th:style="${customStyle} ? ${customStyle} : ''">
+        <label th:for="${name}" th:text="${label}">Label</label>
+        <input th:id="${name}" th:name="${name}" type="text" class="form-control" th:value="${value}" th:placeholder="${placeholder}" th:title="${help}" />
+        <div class="error_container_element" th:id="${'error_container_' + name}"></div>
+    </div>
+</th:block>
+
+
+<!--Input File -->
+<th:block th:fragment="input-file (name, label)">
+    <div th:id="${'container_' + name}" class="form-group" th:classappend="${cssclass} ? ${cssclass} : 'col-lg-4 col-md-6'">
+        <label th:for="${name}" th:text="${label}">Label</label>
+        <input th:id="${name}" th:name="${name}" type="file" class="form-control" th:title="${help}" />
+        <div class="error_container_element" th:id="${'error_container_' + name}"></div>
+    </div>
+</th:block>
+
+
+<!--Input Password -->
+<th:block th:fragment="input-password (name, value, label)">
+    <div th:id="${'container_' + name}" class="form-group" th:classappend="${cssclass} ? ${cssclass} : 'col-lg-4 col-md-6'">
+        <label th:for="${name}" th:text="${label}">Label</label>
+        <input th:id="${name}" th:name="${name}" type="password" class="form-control" th:value="${value}" th:placeholder="${placeholder}" th:title="${help}" />
+        <div class="error_container_element" th:id="${'error_container_' + name}"></div>
+    </div>
+</th:block>
+
+
+<!--Input Hidden -->
+<th:block th:fragment="input-hidden (name, value)">
+    <input th:id="${name}" th:name="${name}" type="hidden" th:value="${value}" />
+</th:block>
+
+
+<!--Input Text Arear -->
+<th:block th:fragment="textarea (name, value, label)">
+    <div th:id="${'container_' + name}" class="form-group" th:classappend="${cssclass} ? ${cssclass} : 'col-sm-12'">
+        <label th:for="${name}" th:text="${label}">Label</label>
+        <textarea th:id="${name}" th:name="${name}" th:text="${value}" class="form-control" th:rows="${rows} ? ${rows} : '3'" th:placeholder="${placeholder}" th:title="${help}"></textarea>
+        <div class="error_container_element" th:id="${'error_container_' + name}"></div>
+    </div>
+</th:block>
+
+
+<!--Input Select -->
+<th:block th:fragment="select-list (name, options, label, value, selectLabel)">
+
+    <div
+            th:id="${'container_' + name}"
+            class="form-group"
+            th:classappend="${cssclass} ? ${cssclass} : 'col-lg-4 col-md-6'" th:style="${customStyle} ? ${customStyle} : ''">
+
+        <label th:for="${name}" th:text="${label}">Label</label>
+        <select
+                th:id="${name}"
+                th:multiple="${#bools.isTrue(#objects.nullSafe(multiple, false))}"
+                class="form-control kt-selectpicker"
+                th:name="${name}"
+                th:attr="filter-selector=${filterSelector} ? ${filterSelector} : ''"
+                th:title="${help}">
+
+            <option th:if="${selectLabel && !(#bools.isTrue(#objects.nullSafe(multiple, false)))}" value="">-- Seleccione una opción --</option>
+            <option th:if="${!selectLabel && !(#bools.isTrue(#objects.nullSafe(multiple, false)))}" value="">&nbsp;</option>
+            <option
+                    th:each="opt : ${options}"
+                    th:selected="${#arrays.contains(#objects.nullSafe(value, {''}), opt.val)}"
+                    th:value="${opt.val}"
+                    th:utext="${opt.txt}"
+                    th:attr="data-one=${#objects.nullSafe(opt.dataOne, '')}, data-tow=${#objects.nullSafe(opt.dataTow, '')},
+                data-three=${#objects.nullSafe(opt.dataThree, '')}, data-four=${#objects.nullSafe(opt.dataFour, '')},
+                data-five=${#objects.nullSafe(opt.dataFive, '')}, data-six=${#objects.nullSafe(opt.dataSix, '')}"></option>
+        </select>
+        <div class="error_container_element" th:id="${'error_container_' + name}"></div>
+    </div>
+</th:block>
+<!--Input Select V2 -->
+<th:block th:fragment="select-list-v2 (name, selectClass, filterSelector, options, label, value, selectLabel)">
+
+    <div
+            th:id="${'container_' + name}"
+            class="form-group"
+            th:classappend="${cssclass} ? ${cssclass} : 'col-lg-4 col-md-6'" th:style="${customStyle} ? ${customStyle} : ''">
+
+        <label th:for="${name}" th:text="${label}">Label</label>
+        <select
+                th:id="${name}"
+                th:multiple="${#bools.isTrue(#objects.nullSafe(multiple, false))}"
+                class="form-control kt-selectpicker"
+                th:classappend="${selectClass} ? ${selectClass} : ''"
+                th:name="${name}"
+                th:attr="filter-selector=${filterSelector} ? ${filterSelector} : ''"
+                th:title="${help}">
+
+            <option th:if="${selectLabel && !(#bools.isTrue(#objects.nullSafe(multiple, false)))}" value="">-- Seleccione una opción --</option>
+            <option th:if="${!selectLabel && !(#bools.isTrue(#objects.nullSafe(multiple, false)))}" value="">&nbsp;</option>
+            <option
+                    th:each="opt : ${options}"
+                    th:selected="${#arrays.contains(#objects.nullSafe(value, {''}), opt.val)}"
+                    th:value="${opt.val}"
+                    th:utext="${opt.txt}"
+                    th:attr="data-one=${#objects.nullSafe(opt.dataOne, '')}, data-tow=${#objects.nullSafe(opt.dataTow, '')},
+                data-three=${#objects.nullSafe(opt.dataThree, '')}, data-four=${#objects.nullSafe(opt.dataFour, '')},
+                data-five=${#objects.nullSafe(opt.dataFive, '')}, data-six=${#objects.nullSafe(opt.dataSix, '')}"></option>
+        </select>
+        <div class="error_container_element" th:id="${'error_container_' + name}"></div>
+    </div>
+</th:block>
+
+<!--Input Multiselect -->
+<th:block th:fragment="duallistbox (name, label, options, selecteds)">
+
+    <div th:id="${'container_' + name}" class="form-group" th:classappend="${cssclass} ? ${cssclass} : 'col-lg-12 col-md-12'" th:style="${customStyle} ? ${customStyle} : ''">
+
+        <label th:for="${name}" th:text="${label}">Label</label>
+
+            <select  th:id="${name}"  th:name="${name}" class="kt-dual-listbox" multiple>
+                <option
+                        th:each="opt : ${options}"
+                        th:selected="${#arrays.contains(selecteds, opt.val)}"
+                        th:value="${opt.val}"
+                        th:utext="${opt.txt}"
+                        th:attr="data-one=${#objects.nullSafe(opt.dataOne, '')}, data-tow=${#objects.nullSafe(opt.dataTow, '')},
+                data-three=${#objects.nullSafe(opt.dataThree, '')}, data-four=${#objects.nullSafe(opt.dataFour, '')},
+                data-five=${#objects.nullSafe(opt.dataFive, '')}, data-six=${#objects.nullSafe(opt.dataSix, '')}"></option>
+            </select>
+
+        <div class="error_container_element" th:id="${'error_container_' + name}"></div>
+
+    </div>
+
+</th:block>
+
+
+<!--Input CheckBox -->
+<th:block th:fragment="checkbox-enabled (name, checked, label)">
+    <div th:id="${'container_' + name}" class="form-group" th:classappend="${cssclass} ? ${cssclass} : 'col-lg-4 col-md-6'" th:style="${customStyle} ? ${customStyle} : ''">
+        <label th:for="${name}" th:text="${label}">Label</label>
+        <div class="kt-checkbox-inline">
+            <label class="kt-checkbox">
+                <input th:id="${name}" th:name="${name}" th:checked="${true == checked}" type="checkbox" th:value="true" />
+                <span></span>
+            </label>
+            <div class="error_container_element" th:id="${'error_container_' + name}"></div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="checkbox-txt (name, checked, txt)">
+    <div th:id="${'container_' + name}" class="form-group" th:classappend="${cssclass} ? ${cssclass} : 'col-lg-4 col-md-6'">
+        <label class="kt-checkbox">
+            <input th:id="${name}" th:name="${name}" th:checked="${true == checked}" type="checkbox" th:value="true" /> &nbsp;
+            <th:block th:text="${txt}"></th:block>
+            <span></span>
+        </label>
+        <div class="error_container_element" th:id="${'error_container_' + name}"></div>
+    </div>
+</th:block>
+
+<th:block th:fragment="inline-checkbox (name, checkboxs, label)">
+    <div th:id="${'container_' + name}" class="form-group" th:classappend="${cssclass} ? ${cssclass} : 'col-lg-4 col-md-6'">
+        <label th:for="${name}" th:text="${label}">Label</label>
+        <div class="kt-checkbox-inline">
+            <div th:each="checkbox : ${checkboxs}" th:classappend="${checkInBlock} ? ${checkInBlock} : ''">
+                <label class="kt-checkbox"  >
+                    <input th:name="${name}" th:checked="${true == checkbox.selected}" type="checkbox" th:value="${checkbox.val}" />
+                    <th:block th:text="${checkbox.txt}"></th:block>
+                    <span></span>
+                </label>
+            </div>
+        </div>
+        <div class="error_container_element" th:id="${'error_container_' + name}"></div>
+    </div>
+</th:block>
+
+
+<!--Input Radio -->
+<th:block th:fragment="inline-radios (name, radios, label, value)">
+    <div th:id="${'container_' + name}" class="form-group" th:classappend="${cssclass} ? ${cssclass} : 'col-lg-4 col-md-6'">
+        <label th:for="${name}" th:text="${label}">Label</label>
+        <div class="kt-radio-inline">
+            <label class="kt-radio" th:each="radio : ${radios}" th:classappend="${checkInBlock} ? ${checkInBlock} : ''">
+                <input th:name="${name}" th:checked="${value == radio.val}" type="radio" th:value="${radio.val}"
+                       th:attr="data-one=${#objects.nullSafe(radio.dataOne, '')}, data-tow=${#objects.nullSafe(radio.dataTow, '')}, data-three=${#objects.nullSafe(radio.dataThree, '')}" />
+                <th:block th:text="${radio.txt}"></th:block>
+                <span></span>
+            </label>
+        </div>
+        <div class="error_container_element" th:id="${'error_container_' + name}"></div>
+    </div>
+</th:block>
+
+<!--Input Text Color -->
+<th:block th:fragment="input-text-color (name, value, label, valuecolor)">
+    <div th:id="${'container_' + name}" class="form-group" th:classappend="${cssclass} ? ${cssclass} : 'col-lg-4 col-md-6'"
+         th:style="${customStyle} ? ${customStyle} : ''">
+        <label th:for="${name}" th:text="${label}">Label</label>
+        <div class=" input-group">
+            <input th:id="${name}" th:name="${name}" type="text" class="form-control" th:value="${value}" th:placeholder="${placeholder}" th:title="${help}" />
+            <input type="hidden" th:id="${'color_' + name}" th:name="${'color_' + name}" th:value="${valuecolor}" >
+            <span class="input-group-append">
+                <span class="input-group-text colorpicker-input-addon"><i></i></span>
+            </span>
+        </div>
+        <div class="error_container_element" th:id="${'error_container_' + name}"></div>
+    </div>
+</th:block>
+
+<!--Input Text Color -->
+<th:block th:fragment="color-picker (name, value, label)">
+    <div th:id="${'container_' + name}" class="form-group" th:classappend="${cssclass} ? ${cssclass} : 'col-lg-4 col-md-6'"
+         th:style="${customStyle} ? ${customStyle} : ''">
+        <label th:for="${name}" th:text="${label}">Label</label>
+        <div class=" input-group">
+            <input th:id="${name}" th:name="${name}" type="text" class="form-control" th:value="${value}" th:placeholder="${placeholder} ? ${placeholder} : 'Color'" th:title="${help}" />
+            <span class="input-group-append">
+                <span class="input-group-text colorpicker-input-addon"><i></i></span>
+            </span>
+        </div>
+        <div class="error_container_element" th:id="${'error_container_' + name}"></div>
+    </div>
+</th:block>
