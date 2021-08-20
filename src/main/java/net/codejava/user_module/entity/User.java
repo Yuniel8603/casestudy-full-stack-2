@@ -1,7 +1,6 @@
 package net.codejava.user_module.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tbl_user")
@@ -11,11 +10,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotBlank(message = "Name is mandatory")
     @Column(name = "user_name")
     private String name;
 
-    @NotBlank(message = "Email is mandatory")
     @Column(name = "user_email")
     private String email;
 

@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
-
 @Controller
 public class UserController {
 
@@ -24,7 +22,7 @@ public class UserController {
     }
 
     @PostMapping("/adduser")
-    public String addUser(@Valid User user, BindingResult result, Model model) {
+    public String addUser(User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "add-user";
         }
@@ -49,7 +47,7 @@ public class UserController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateUser(@PathVariable("id") long id, @Valid User user,
+    public String updateUser(@PathVariable("id") long id, User user,
                              BindingResult result, Model model) {
         if (result.hasErrors()) {
             user.setId(id);
