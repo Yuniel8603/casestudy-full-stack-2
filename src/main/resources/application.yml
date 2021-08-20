@@ -52,12 +52,12 @@ spring:
         serialization:
            write-dates-as-timestamps: false
     mail:
-        alias: Gedux
-        from: noreply@gedux.mx
-        host: smtp.ionos.mx
-        port: 587
-        username: app@gedux.mx
-        password: A8U8TstP9.W2xVx
+        alias:
+        from:
+        host:
+        port:
+        username:
+        password:
     servlet:
       multipart:
         max-file-size: 5MB
