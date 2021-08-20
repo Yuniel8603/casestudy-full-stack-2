@@ -19,7 +19,7 @@ spring:
     datasource:
         url: jdbc:postgresql://localhost:5432/testing
         username: postgres
-        password: N0rges123
+        password: root
         test-on-borrow: true
         validation-query: SELECT 1
 #    flyway:

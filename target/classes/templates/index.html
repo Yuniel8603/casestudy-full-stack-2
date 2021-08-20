@@ -4,8 +4,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/base}">
 <head>
+    <title>index</title>
 </head>
-<body>
+<body >
 <div th:switch="${users}">
     <h2 th:case="null">No users yet!</h2>
     <div th:case="*">
